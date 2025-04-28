@@ -1,7 +1,7 @@
 package core
 
 import (
-	"gvb_server/globel"
+	"gvb_server/global"
 	"log"
 	"time"
 
@@ -12,13 +12,13 @@ import (
 )
 
 func InitGorm() *gorm.DB {
-	if globel.Config.Mysql.Host == "" {
+	if global.Config.Mysql.Host == "" {
 		log.Println("没有配置MySQL,取消连接")
 		return nil
 	}
-	dsn := globel.Config.Mysql.DSN()
+	dsn := global.Config.Mysql.DSN()
 	var mysqllogger logger.Interface
-	if globel.Config.System.Env == "debug" {
+	if global.Config.System.Env == "debug" {
 		//开发环境显示所有mysql
 		mysqllogger = logger.Default.LogMode(logger.Info)
 	} else {

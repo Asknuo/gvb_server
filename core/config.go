@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 	"gvb_server/config"
-	"gvb_server/globel"
+	"gvb_server/global"
 	"io/ioutil"
 	"log"
 
@@ -22,5 +22,5 @@ func InitConfig() {
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
-	globel.Config = c
+	global.Config = c
 }

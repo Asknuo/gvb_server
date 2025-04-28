@@ -1,4 +1,4 @@
-package globel
+package global
 
 import (
 	"gvb_server/config"
