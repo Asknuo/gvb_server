@@ -3,6 +3,7 @@ package main
 import (
 	"gvb_server/core"
 	"gvb_server/global"
+	"gvb_server/routers"
 )
 
 func main() {
@@ -10,9 +11,12 @@ func main() {
 	core.InitConfig()
 	//初始化日志
 	global.Log = core.InitLog()
-	global.Log.Warnln("warn")
-	global.Log.Error("error")
-	global.Log.Info("info")
 	//连接数据库
 	global.DB = core.InitGorm()
+	//初始化路由
+	router := routers.InitRouters()
+	addr := global.Config.System.Addr()
+	global.Log.Infoln("服务启动成功,地址为:", addr)
+	//启动服务
+	router.Run(addr)
 }
