@@ -6,17 +6,17 @@ import (
 
 type UserModel struct {
 	MODEL
-	NickName      string           `grom : "size:42" json:"nick_name"`                                                      //昵称
-	UserName      string           `grom : "size:36" json:"user_name"`                                                      //用户名
-	Password      string           `grom : "size:64" json:"password"`                                                       //密码
-	Avatar        string           `grom : "size:256" json:"avator"`                                                        //头像
-	Email         string           `json: "email"`                                                                          //邮箱
-	Tel           string           `grom : "size:18" json:"telephone"`                                                      //电话号码
-	addr          string           `grom : "size:64" json:"addr"`                                                           //地址
-	Token         string           `grom : "size:64" json:"token"`                                                          //其他平台唯一的id
-	IP            string           `grom : "size:20" json:"ip"`                                                             //ip地址
-	Role          ctype.Role       `grom : "size:4;default:1;" json:"role"`                                                 //权限
-	SignStatus    ctype.SignStatus `grom : "type = smallint(6)" json:"sign_status"`                                         //注册来源
-	ArticleModels []ArticleModel   `gorm:"foreignKey:AuthId" json:"-"`                                                      //发布文章列表
-	CollectModels []ArticleModel   `gorm:"many2many:auth2_collect;joinForeignKey:AuthID;JoinReferences:ArticleID" json:"-"` //收藏文章列表
+	NickName      string           `gorm:"size:42" json:"nick_name"`
+	UserName      string           `gorm:"size:36" json:"user_name"`
+	Password      string           `gorm:"size:64" json:"password"`
+	Avatar        string           `gorm:"size:256" json:"avator"`
+	Email         string           `json:"email"`
+	Tel           string           `gorm:"size:18" json:"telephone"`
+	addr          string           `gorm:"size:64" json:"addr"`
+	Token         string           `gorm:"size:64" json:"token"`
+	IP            string           `gorm:"size:20" json:"ip"`
+	Role          ctype.Role       `gorm:"size:4;default:1;" json:"role"`
+	SignStatus    ctype.SignStatus `gorm:"type=smallint(6)" json:"sign_status"`
+	ArticleModels []ArticleModel   `gorm:"foreignKey:UserID" json:"-"`                                                            // 修改为 UserID（大写 D）
+	CollectModels []ArticleModel   `gorm:"many2many:user_collect_models;joinForeignKey:UserID;JoinReferences:ArticleID" json:"-"` // 收藏文章列表
 }

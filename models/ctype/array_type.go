@@ -1,24 +1,32 @@
 package ctype
 
 import (
-	"database/sql/driver"
+	"errors"
 	"strings"
 )
 
 type Array []string
 
 func (t *Array) Scan(value interface{}) error {
-	var v []byte
-	v, _ = value.([]byte)
-	if string(v) == "" {
+	if value == nil {
 		*t = []string{}
 		return nil
 	}
-	*t = strings.Split(string(v), "\n")
-	return nil
-}
 
-func (t Array) Value() (driver.Value, error) {
-	//将数字转化成为值
-	return strings.Join(t, "\n"), nil
+	var str string
+	switch v := value.(type) {
+	case []byte:
+		str = string(v)
+	case string:
+		str = v
+	default:
+		return errors.New("unsupported type for ctype.Array, expected string or []byte")
+	}
+
+	if str == "" {
+		*t = []string{}
+		return nil
+	}
+	*t = strings.Split(str, "\n")
+	return nil
 }
