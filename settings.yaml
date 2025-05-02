@@ -31,7 +31,30 @@ site_info:
   slogan_en: askanuo's house
   web: http://www.askanuo.com/
 
+qq: 
+  app_id: "xx"
+  key: xx
+  redirect:  http://xx.xx.com/login?flag=qq
+email:
+  host: smtp.qq.com
+  port: 465
+  user: xxx&qq.com
+  password: xxx
+  default_from_email: Askanuo
+  use_ssl: xx 
+  use_tls: xx
+jwt:
+  secret: xxx
+  expires: 48
+  issuer: xx
 
+qi_niu:
+  access_key: UMM-xx-FdRIf-xx
+  secret_key: xx
+  bucket: Askanuo
+  cdn: xx://xx.xx.com
+  zone: xx
+  size: 5
 
 
 
