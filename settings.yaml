@@ -1,10 +1,10 @@
 mysql:
- host: localhost
- port: 3306
- db: gvb_db
- user: root
- password: 051102ydq 
- log_level: dev
+  host: localhost
+  port: 3306
+  db: gvb_db
+  user: root
+  password: 051102ydq 
+  log_level: dev
 logger :
   level: info
   prefix: '[gvb]'
@@ -16,3 +16,23 @@ system:
   host: "0.0.0.0"
   port: 8080
   env: release
+site_info:
+  created_at: "2025-5"
+  title: Askanuo的小屋
+  bei_an: nonono
+  qq_image: https://b0.bdstatic.com/5c42599f6805c9572909ecfe677f64c8.jpg@h_1280
+  version: 1.0.0
+  email:  3263296956@qq.com
+  wechat_image: https://img1.baidu.com/it/u=3165023803,2137666183&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500
+  name: Askanuo的House
+  job : go+gin+gorm
+  addr: 广东珠海
+  slogan: Askanuo的House
+  slogan_en: askanuo's house
+  web: http://www.askanuo.com/
+
+
+
+
+
+  
