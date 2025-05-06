@@ -2,11 +2,9 @@ package routers
 
 import (
 	"gvb_server/api"
-
-	"github.com/gin-gonic/gin"
 )
 
-func settingsRouter(router *gin.Engine) {
+func (router RouterGroup) SettingsRouter() {
 	settingsApi := api.ApiGroupApp.SettingsApi
 	router.GET("settings/:name", settingsApi.SettingsInfoView)
 	router.PUT("settings/:name", settingsApi.SettingsInfoUpdateView)

@@ -33,6 +33,4 @@ func (SettingsApi) SettingsInfoView(c *gin.Context) {
 	default:
 		res.FailWithMsg("没有对应的信息", c)
 	}
-
-	res.OKWithData(global.Config.SiteInfo, c)
 }

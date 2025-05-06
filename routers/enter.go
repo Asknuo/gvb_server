@@ -6,9 +6,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type RouterGroup struct {
+	*gin.RouterGroup
+}
+
 func InitRouters() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	router := gin.Default()
-	settingsRouter(router)
+	apiRouterGroup := router.Group("api")
+	routerGroupApp := RouterGroup{apiRouterGroup}
+	routerGroupApp.SettingsRouter()
+	routerGroupApp.ImagesRouter()
+
 	return router
 }
