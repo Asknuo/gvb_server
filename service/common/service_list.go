@@ -17,11 +17,14 @@ func ComList[T any](model T, option Option) (List []T, count int64, err error) {
 	if option.Debug {
 		DB = global.DB.Session(&gorm.Session{Logger: global.MysqlLog})
 	}
+	if option.Sort == "" {
+		option.Sort = "created_at desc"
+	}
 	count = DB.Select("id").Find(&List).RowsAffected
 	offset := (option.Page - 1) * option.Limit
 	if offset < 0 {
 		offset = 0
 	}
-	err = global.DB.Limit(option.Limit).Offset(offset).Find(&List).Error
+	err = global.DB.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&List).Error
 	return List, count, err
 }
