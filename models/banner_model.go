@@ -1,7 +1,10 @@
 package models
 
 import (
+	"gvb_server/global"
 	"gvb_server/models/ctype"
+	"log"
+	"os"
 
 	"gorm.io/gorm"
 )
@@ -15,6 +18,12 @@ type BannerModel struct {
 }
 
 func (b *BannerModel) BeforeDelete(tx *gorm.DB) (err error) {
-
-	return
+	if b.ImageType == ctype.Local {
+		//本地图片,删除
+		err = os.Remove(b.Path)
+		log.Println("Error:", err)
+		global.Log.Error(err)
+		return err
+	}
+	return nil
 }
