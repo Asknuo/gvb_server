@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"gvb_server/global"
 	"gvb_server/models"
+	"gvb_server/models/ctype"
 	"gvb_server/models/res"
+	"gvb_server/plugins/qiniu"
 	"gvb_server/utils"
 	"io"
 	"io/fs"
@@ -83,7 +85,7 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 		if err != nil {
 			global.Log.Error(err)
 		}
-		byteData, err := io.ReadAll(fileObj)
+		byteData, _ := io.ReadAll(fileObj)
 		imageHash := utils.Md5(byteData)
 		//去数据库中查这个图片是否存在
 		var bannerModel models.BannerModel
@@ -95,6 +97,26 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 				IsSuccess: false,
 				Msg:       "图片已经存在",
 			})
+			continue
+		}
+		if global.Config.QiNiu.Enable {
+			filePath, err = qiniu.UploadImage(byteData, fileName, "gvb")
+			if err != nil {
+				global.Log.Error(err)
+				continue
+			}
+			reslist = append(reslist, FileUploadResponse{
+				FileName:  file.Filename,
+				IsSuccess: true,
+				Msg:       "上传到云成功",
+			})
+			global.DB.Create(&models.BannerModel{
+				Path:      filePath,
+				Hash:      imageHash,
+				Name:      fileName,
+				ImageType: ctype.Qiniu,
+			})
+			continue
 		}
 		err = c.SaveUploadedFile(file, filePath)
 		if err != nil {
@@ -113,9 +135,10 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 		})
 		//图片入库
 		global.DB.Create(&models.BannerModel{
-			Path: filePath,
-			Hash: imageHash,
-			Name: fileName,
+			Path:      filePath,
+			Hash:      imageHash,
+			Name:      fileName,
+			ImageType: ctype.Local,
 		})
 	}
 	res.OKWithData(reslist, c)

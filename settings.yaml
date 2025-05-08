@@ -38,13 +38,13 @@ qq:
   key: xx
   redirect: http://xx.xx.com/login?flag=qq
 qi_niu:
-  enable : false
-  access_key: UMM-xx-FdRIf-xx
-  secret_key: xx
-  bucket: Askanuo
+  enable : true
+  access_key: XFlYeqpdV29BMb0chpVDOV1kkZtrIRAPLohOa2sg
+  secret_key: 7kpI25qXM1B4DhQCTNgiLlAeSy3gOow6mPBN9i7_
+  bucket: 1askanuo1
   cdn: xx://xx.xx.com
-  zone: xx
-  size: "5"
+  zone: z2
+  size: 5
 email:
   host: smtp.qq.com
   port: 465
