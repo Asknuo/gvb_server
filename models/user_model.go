@@ -12,7 +12,7 @@ type UserModel struct {
 	Avatar        string           `gorm:"size:256" json:"avator"`
 	Email         string           `json:"email"`
 	Tel           string           `gorm:"size:18" json:"telephone"`
-	addr          string           `gorm:"size:64" json:"addr"`
+	Addr          string           `gorm:"size:64" json:"addr"`
 	Token         string           `gorm:"size:64" json:"token"`
 	IP            string           `gorm:"size:20" json:"ip"`
 	Role          ctype.Role       `gorm:"size:4;default:1;" json:"role"`
