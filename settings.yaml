@@ -45,6 +45,7 @@ qi_niu:
   cdn: xx://xx.xx.com
   zone: z2
   size: 5
+  prefix: "gvb"
 email:
   host: smtp.qq.com
   port: 465
