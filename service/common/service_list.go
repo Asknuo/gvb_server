@@ -20,7 +20,10 @@ func ComList[T any](model T, option Option) (List []T, count int64, err error) {
 	if option.Sort == "" {
 		option.Sort = "created_at desc"
 	}
-	count = DB.Select("id").Find(&List).RowsAffected
+	query := DB.Where(model)
+	count = query.Select("id").Find(&List).RowsAffected
+	//这里query会受到上面查询的影响
+	query = DB.Where(model)
 	offset := (option.Page - 1) * option.Limit
 	if offset < 0 {
 		offset = 0

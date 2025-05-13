@@ -13,9 +13,12 @@ type Response struct {
 	Data any    `json:"data"`
 }
 
+// swagger:model ListResponseAdvert
 type ListResponse[T any] struct {
+	// Total number of items
 	Count int64 `json:"count"`
-	List  T     `json:"list"`
+	// List of items
+	List T `json:"list"`
 }
 
 const (

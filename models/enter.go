@@ -13,9 +13,23 @@ type MODEL struct {
 type RemoveRequest struct {
 	IDList []uint `json:"id_list"`
 }
+
+// swagger:model PageInfo
 type PageInfo struct {
-	Page  int    `form:"page"`
-	Key   string `form:"key"`
-	Limit int    `form:"limit"`
-	Sort  string `form:"sort"`
+	// Page number for pagination
+	// Required: true
+	// Minimum: 1
+	Page int `form:"page" json:"page"`
+
+	// Search keyword
+	Key string `form:"key" json:"key"`
+
+	// Number of items per page
+	// Required: true
+	// Minimum: 1
+	// Maximum: 100
+	Limit int `form:"limit" json:"limit"`
+
+	// Sort order (e.g., "asc" or "desc")
+	Sort string `form:"sort" json:"sort"`
 }
